@@ -1,0 +1,132 @@
+.recent-projects {
+  
+  &--m-top {
+    margin-top: 4rem;
+  }
+
+  &__text {
+      z-index: 5;
+      transition: all 0.8s ease-in-out;
+      text-align: center;
+      color: $dark-gray;
+      color: white;
+      max-width: 20rem;
+  }
+
+  &__image-container {
+      height: 25rem;
+      position: relative;
+      overflow: hidden;
+  }
+  &__image {
+      left: -30px;
+      top: -30px;
+      position: absolute;
+      width: calc(100% + 60px);
+      height: calc(100% + 60px);
+      position: absolute;
+      overflow: hidden;
+      filter: blur(3px);
+      transition: all 0.8s ease-in-out;
+      box-shadow: inset 0 0 0 10000px rgba(134, 133, 127, 0.5);
+  }
+
+  :nth-of-type(2n+0) {
+    .recent-projects__image {
+      box-shadow: inset 0 0 0 10000px rgba(0, 0, 0, 0.6); 
+    }
+    .recent-projects__text {
+      color: white;
+    }
+  }
+
+  :nth-of-type(3n+0) {
+    .recent-projects__image {
+      box-shadow: inset 0 0 0 10000px rgba(16, 74, 112, 0.3); 
+    }
+    .recent-projects__text {
+      color: white;
+    }
+  }
+
+  &__image-container:hover {
+      .recent-projects__image {
+          filter: blur(0);
+          box-shadow: none; 
+      }
+      .recent-projects__text {
+          opacity: 0;
+      }
+  }
+
+  
+  
+}
+
+
+
+
+
+$expand-column-transition: all 0.8s ease-in-out;
+$expand-column-background-color: #2c3840;
+$expand-column-hover-width: 10%;
+$expand-column-fluid: true;
+
+.expand-row-wrapper {
+  height: 25rem;
+
+  @if $expand-column-fluid == 'true' {
+    max-width: none;
+  } @else {
+    max-wdtih: $global-width;
+  }
+
+  .cell {
+    transition: $expand-column-transition;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      flex-basis: $expand-column-hover-width;
+    }
+
+    &:hover {
+      .expand-row-content {
+        opacity: 1;
+      }
+    }
+  }
+
+
+
+  @include breakpoint(small only) {
+    flex-direction: column;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

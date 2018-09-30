@@ -1,0 +1,32 @@
+{# Feature video template #}
+
+{% if entry.slug == 'services' %}
+    <section class="recent-projects  recent-projects--m-top">
+    {% else %}
+    <section class="recent-projects">
+{% endif %}
+
+
+    <div class="grid-container  full">
+        <div class="grid-x  expand-row-wrapper">
+            {% for entry in craft.entries.section('work') %}
+            {% if entry.featured %}
+                <div class="cell  auto  recent-projects__image-container">
+                    
+                    {% if entry.heroThumbnail | length %}
+                    {% set image = entry.heroThumbnail.first() %}
+                    <a href="{{ entry.url }}">
+                        <figure class="recent-projects__image" style="background: url(' {{ image.getUrl() }} ') no-repeat center center; background-size: cover;">
+                        </figure> 
+                    </a>
+                    {% endif %} 
+                    <figcaption class="recent-projects__text">
+                        <h4 class="bold" >{{ entry.title }}</h4>
+                    </figcaption>
+                    
+                </div>                        
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>        
+</section>

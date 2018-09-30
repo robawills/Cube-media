@@ -1,0 +1,99 @@
+{#
+ # Services template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layouts/base" %}
+
+{% block content %}
+
+    
+        {% if entry.heroBackground|length %}
+            {% for asset in entry.heroBackground %}
+                <article class="hero  hero--small" style="background: url('{{ asset.url }}') no-repeat center center;background-size: cover;">
+                </article>  
+            {% endfor %}
+        {% endif %}
+
+        <section class="services">
+            <div class="grid-container">
+                <div class="grid-x  grid-margin-x">
+                    <div class="medium-9  cell">
+                        <h5>What we do</h5>
+                        <h1>{{ entry.singleHeadline }}</h1>
+                    </div>
+
+                    {% if entry.services|length %}
+                        {% for service in entry.services %}
+                
+                        <div class="medium-4  cell">
+                            <div class="services__header  services__container">
+                                <div class="services__icon-border">
+                                    {% for asset in service.serviceIcon %}
+                                        <img src="{{ asset.url }}">
+                                    {% endfor %}
+                                </div>
+                                <h2 class="services__title">{{ service.serviceTitle }}</h2>
+                            </div>
+                            <p>
+                                {{ service.serviceDescription }}
+                            </p>
+                        </div>
+
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="medium-4  cell">
+                        <div class="services__container">
+                            <h3 class="services__title  services__title--large">
+                                Full service video production and animation.
+                            </h3>
+                            <a href="{{ url('work') }}"><h5>View work</h5></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% if entry.behindTheScenes|length %}
+            <section class="media  media--bg">
+                <div class="grid-container">
+                    <div class="grid-x  grid-margin-x">
+                        <div class="small-12  cell">
+                            <h1>Behind the scenes</h1>
+                        </div>
+                        {% for video in entry.behindTheScenes %}
+                            <div class="small-12  medium-6  cell">
+                                <article class="media__size">
+                                    <div class='embed-container'><iframe src='{{ video.videoUrl }}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+                                </article>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+
+        {# {% include '_partials/feature' %} #}
+
+    
+
+{% endblock %}
+
+
+

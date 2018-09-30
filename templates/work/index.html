@@ -1,0 +1,87 @@
+{#
+ # Work index
+ # ---------------
+ #
+ # This template gets loaded whenever the Work index is requested, because
+ # the Work Index single-entry section's Template setting is set to
+ # "work/_index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Work Index entry.
+ #}
+
+ {% extends "_layouts/base" %}
+
+ {% block content %}
+
+  <section class="project-list">
+      <div class="grid-container">
+          <div class="grid-x  grid-padding-x">
+            
+            {% for entry in craft.entries.section('work') %}
+                {% if entry.children | length  %}
+                  {% if loop.first %}
+                  <!-- col left -->
+                    <div class="small-12  medium-6  cell">
+                      <div class="project-list__keyline" id="col-left">
+                        <h2 class="project-list__header">{{ entry.title }}</h2>
+                        {% for child in entry.children %}
+                        <a href="{{ child.url }}" class="project-list__link">
+                          <article class="project-list__articale"></article>
+                            {% if child.heroThumbnail | length %}
+                              {% set image = child.heroThumbnail.first() %}
+                              <div class="project-list__img" style="background: url(' {{ image.getUrl() }} ') no-repeat center center; background-size: cover;">
+                                <div class="project-list__hover">+</div>
+                              </div>
+                            {% endif %}
+                            <h2 class="project-list__details">{{ child.title }}</h2>
+                          </article>
+                        </a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  
+                  {% else %}
+                  <!-- col right -->
+                  <div class="small-12  medium-6  cell">
+                      <div id="col-right">
+                          <div class="grid-container  full">
+                            <div class="grid-x  grid-padding-x">
+                              <div class="small-12  cell">
+                                  <h2 class="project-list__header">{{ entry.title }}</h2>
+                              </div>
+
+                              {% for child in entry.children %}
+                                <div class="small-12  medium-6  cell">
+                                  <a href="{{ child.url }}" class="project-list__link">
+                                    <article class="project-list__articale">
+                                      {% if child.heroThumbnail | length %}
+                                      {% set image = child.heroThumbnail.first() %}
+                                        <div class="project-list__img  project-list__img--s" style="background: url(' {{ image.getUrl() }} ') no-repeat center center; background-size: cover;">
+                                          <div class="project-list__hover">+</div>
+                                        </div>
+                                      {% endif %}
+                                      <h2 class="project-list__details">{{ child.title }}</h2>
+                                    </article>
+                                  </a>
+                                </div>
+                              {% endfor %}
+                              
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+              {% endif %}
+            {% endfor %}
+
+          </div>
+        </section>
+
+ 
+ {% endblock %}
+ 
+ 
+
+ 

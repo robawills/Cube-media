@@ -1,0 +1,14 @@
+.media {
+    &--bg {
+        background-color: $off-white;
+        padding: 5rem 0;
+        margin-top: 7rem;
+    }
+    &__size {
+        background-color: $orange;
+        margin: 1.5rem 0;
+        &--s {
+            min-height: 23rem;
+        }
+    }
+}

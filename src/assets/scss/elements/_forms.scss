@@ -1,0 +1,40 @@
+/*----------------------------------------------------------------------------*\
+    #FORM ELEMENT STYLES
+\*----------------------------------------------------------------------------*/
+
+.footer input {
+    border: none;
+    border-bottom: 1px solid $white;
+    box-shadow: none;
+    color: $white;
+}
+
+
+.footer input:focus {
+    border: none;
+    border-bottom: 2px solid $blue;
+    box-shadow: none;
+}
+
+
+
+
+.chat__form label {
+    color: $dark-gray;
+}
+
+.chat__form input {
+    border: none;
+    border-bottom: 1px solid $dark-gray;
+    box-shadow: none;
+    color: $dark-gray;
+    background: none;
+}
+
+
+.chat__form input:focus {
+    border: none;
+    border-bottom: 2px solid $orange;
+    box-shadow: none;
+    background: none;
+}

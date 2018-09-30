@@ -1,0 +1,93 @@
+.chat {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: $blue;
+    border: 0.25rem solid $blue;
+    z-index: 10;
+    transition: all 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(medium) {
+        bottom: 2rem;
+        right: 2rem;
+    }
+
+    &:hover{
+        background-color: $orange;
+        border: 0.25rem solid $orange;
+    }
+
+    &__icon {
+        width: 1.75rem;
+        height: auto;
+        margin: 0.8rem 0;
+    }
+
+
+    &__close {
+        width: 1.25rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        border-radius: 0 0.25rem 0 0;
+        transition: all 0.2s;
+
+        &:hover {
+            width: 1.2rem;
+        }
+    }
+
+    &__form {
+        visibility: hidden;
+        opacity: 0;
+
+    }
+
+    &--open {
+        width: 19rem;
+        height: 25rem;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        background-color: $off-white;
+        border: 0.25rem solid $orange;
+
+        @include breakpoint(medium) {
+            width: 20rem;
+        }
+
+        &:hover {
+            background-color: $off-white;
+        }
+
+        .chat__icon {
+            visibility: hidden;
+            opacity: 0;
+            display: none;
+        }
+        .chat__close {
+            opacity: 1;
+            visibility: visible;
+        }
+        .chat__form {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__button {
+        background-color: $orange;
+        color: white;
+        &:hover {
+            background-color: $blue;
+            color: white;
+        }
+    }
+}

@@ -1,0 +1,150 @@
+{#
+ # Layout template
+ # ---------------
+ #
+ # This template defines your site’s global layout. It can be
+ # “extended” by other templates to fill in the gaps.
+ #
+ # See Twig’s Template Inheritance documentation for more details:
+ # http://twig.sensiolabs.org/doc/templates.html#template-inheritance
+ #}
+
+{% set baseUrl = craft.config.environmentVariables.baseUrl ?? siteUrl %}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
+    <head>
+    	<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="coverage" content="Worldwide">
+        <meta name="format-detection" content="telephone=no">
+    	<title>Cube Media</title>
+        <link rel="home" href="{{ siteUrl }}">
+        <link rel='stylesheet prefetch' href='https://cdn.rawgit.com/michalsnik/aos/2.0.4/dist/aos.css'>
+        <link href="{{ baseUrl }}assets/css/app.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,700" rel="stylesheet">
+        
+    </head>
+    
+    <body>
+        {% set urls = [
+            siteUrl,
+            craft.entries.id(77).first().url(),
+            craft.entries.id(78).first().url()
+        ] %}
+        
+        {% if craft.request.getUrl() in urls %}
+            <header class="header  header--light">
+        {% else %}
+            <header class="header  header--dark">
+        {% endif %}
+            <div class="grid-container">
+                <div class="grid-x  grid-margin-x  align-justify  align-middle  header__wrap">
+                    <div class="cell  shrink">
+                        <a href="{{ siteUrl }}">
+                            <div class="header__logo">Cube<sup>2</sup></div>
+                            <div class="header__logo-sub">Media</div>
+                        </a>
+                    </div>
+                    <div class="cell  shrink">
+                
+                        <button class="hamburger" type="button" data-toggle="offCanvas">
+                            <div class="menu-b-1"></div>
+                            <div class="menu-b-2"></div>
+                            <div class="menu-b-3"></div>
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>              
+        </header>  
+
+        
+
+        <div class="cell">
+            <div class="off-canvas-wrapper">
+                <div class="off-canvas   position-right" id="offCanvas" data-off-canvas>
+                    <div class="grid-container  nav">
+                        <div class="grid-x  grid-margin-x">
+                            <div class="small-12  cell">
+                                <nav class="nav__container">
+                                    <ul class="vertical menu accordion-menu" data-accordion-menu>
+                                        <li class="nav__item"><a href="{{ siteUrl }}">Home</a></li>
+                                        <li class="nav__item"><a href="{{ url('work') }}">Projects</a></li>
+                                        <li class="nav__item"><a href="{{ url('services') }}">Services</a></li>
+                                        <li class="nav__item"><a href="{{ url('about') }}">About us</a></li>
+                                        <li class="nav__item"><a href="{{ url('contact') }}">Contact us</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat" class="chat">
+
+            <img class="chat__icon" src="{{ siteUrl }}/uploads/images/global/email.png" width="100" height="auto">
+            <img class="chat__close" src="{{ siteUrl }}/uploads/images/global/close.png" width="100" height="auto">
+            <form class="chat__form">
+                <label>
+                    Name*
+                    <input type="text">
+                </label>
+                <label>
+                    Email*
+                    <input type="email">
+                </label>
+                <label>
+                    Message
+                    <input type="email">
+                </label>
+                <button class="button  chat__button">Submit</button>
+            </form>
+        </div>
+
+        <main role="main" class="app-main">
+            {% block content %}
+                <p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+                <p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+            {% endblock %}
+        </main>
+
+        
+        <section class="grid-container">
+            <div class="grid-x  grid-margin-x ">
+                <div class="small-12  cell  foot-contact">
+                    <h3 class="foot-contact__title  text-center  bold">
+                        Discuss your project with us
+                    </h3>
+                    <h3 class="text-center">
+                        <a href="mailto:info@cube.video" class="foot-contact__link">info@cube.video</a> <a href="tel:01628260627" class="foot-contact__link">+44 (0) 1628 260 627</a></h2>
+                    </h3>
+                </div>
+            </div>
+        </section>
+        
+        
+        <footer>
+            <section class="footer">
+                <div class="grid-container">
+                    <div class="grid-x  grid-margin-x">
+                        <div class="cell">
+                            <p>Video production | Website created by Cube Video © Cube Video Limited 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </section>           
+        </footer>
+
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ craft.simpleMap.apiKey }}&callback=initMap" async defer></script>
+
+        {% includeJsFile baseUrl ~ 'assets/js/app.js' %}
+
+    </body>
+
+</html>

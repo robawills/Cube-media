@@ -1,0 +1,23 @@
+.team {
+    margin-bottom: 4rem;
+    &__img {
+        height: 23rem;
+        background-color: $light-gray;
+        margin: 1.5rem 0;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+    }
+    &__job {
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+    }
+
+    &__discription {
+        margin-bottom: 3.5rem;
+    }
+}

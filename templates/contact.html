@@ -1,0 +1,93 @@
+{#
+ # Contact us template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+ {% extends "_layouts/base" %}
+
+ {% block content %}
+ 
+     <main class="app-main" role="main">
+ 
+         <section class="contact">
+             <div class="grid-container">
+                 <div class="grid-x  grid-margin-x  align-justify">
+                     <div class="medium-10  cell">
+                         <h5>Contact us</h5>
+                         {% if entry.singleHeadline|length %}
+                            <h1>{{ entry.singleHeadline }}</h1>
+                         {% endif %}
+                     </div>
+
+                     <div class="medium-7  cell">
+                        {% include '_form/form' %}
+                     </div>
+
+                     <div class="medium-4  cell">
+                         <div class="grid-x  grid-margin-x">
+                             <div class="medium-6  cell  contact__details">
+                                 <h6>Call us</h6>
+                                 <p>{{ globalContact.contactPhone }}</p>
+                             </div>
+                             <div class="medium-6  cell  contact__details">
+                                 <h6>Email us</h6>
+                                 <p><a href="mailto:{{ globalContact.contactEmail }}">{{ globalContact.contactEmail }}</a></p>
+                             </div>
+                             <div class="medium-12  cell  contact__details">
+                                 <h6>Address</h6>
+                                 <p>{{ globalContact.contactAddress }}</p>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+             </div>
+         </section>
+            
+        <div class="map" id="map"></div>
+        </div>
+
+        <script>
+            var map;
+            function initMap() {
+              // Display the map
+              map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                  lat: {{ entry.contactMap.lat }},
+                  lng: {{ entry.contactMap.lng }}
+                },
+                zoom: {{ entry.contactMap.zoom }},
+                styles: [{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"##000000"},{"lightness":"53"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"##000000"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","elementType":"geometry.fill","stylers":[{"color":"#c9efbb"},{"lightness":"25"}]},{"featureType":"poi.business","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#c9efbb"},{"lightness":"0"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#17253e"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#17253e"},{"lightness":"38"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#17253e"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"lightness":"100"}]},{"featureType":"road.highway","elementType":"labels.text.stroke","stylers":[{"lightness":"-77"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#8bb8cb"}]}]
+                });
+              
+              // Display the marker
+              var marker = new google.maps.Marker({
+                position: {
+                  lat: {{ entry.contactMap.lat }},
+                  lng: {{ entry.contactMap.lng }}
+                },
+                // A custom icon can be defined here, if desired
+                // icon: '/path/to/custom/icon.png',
+                map: map
+              });
+            }
+          </script>
+
+     </main> 
+ 
+ {% endblock %}
+ 
+ 

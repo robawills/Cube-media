@@ -1,0 +1,57 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.5s;
+    z-index: 15 ;
+
+    &__wrap {
+        padding: 1.5rem 0;
+    }
+
+    &__logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1.5rem;
+        transition: all 0.5s;
+    }
+    &__logo-sub {
+        font-size: 1.25rem;
+        letter-spacing: 0.18rem;
+        line-height: 1rem;
+        transition: all 0.5s;
+    }
+
+    &--light {
+
+        .header__logo {
+            color: white;
+        }
+        .header__logo-sub {
+            color: white;
+        }
+
+        .menu-b-1, .menu-b-2, .menu-b-3 {
+            
+            background-color: white;
+
+        }
+    }
+
+    &--dark {
+
+        .header__logo {
+            color: $dark-gray;
+        }
+        .header__logo-sub {
+            color: $dark-gray;
+        }
+
+        .menu-b-1, .menu-b-2, .menu-b-3 {
+            
+            background-color: $dark-gray;
+
+        }
+    }
+}

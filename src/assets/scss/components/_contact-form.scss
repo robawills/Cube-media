@@ -1,0 +1,66 @@
+.contact-form {
+
+    &__label {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        color: $dark-gray;
+        font-size: 0.75rem;
+        margin: 0 0 0.5rem;
+    }
+
+    &__input {
+        border: none;
+        border-bottom: 1px solid $light-gray;
+        box-shadow: none;
+        transition: all 0.2s;
+
+        &:focus {
+            border: none;
+            border-bottom: 2px solid $orange;
+            box-shadow: none;
+        }
+    }
+
+    &__disclaimer {
+        color: $dark-gray;
+        line-height: 1.25rem;
+    }
+
+    &__validation-msg {
+        color: red;
+        text-align: right;
+        text-align: end;
+    }
+
+    &__success-msg {
+        color: #22ef22;
+    }
+}
+
+.errors {
+    margin: 1rem;
+    color: red;
+
+    ul {
+        margin: 0;
+        list-style: none;
+    }
+}
+
+[type="checkbox"] + label, [type="radio"] + label {
+    vertical-align: top;
+
+}
+
+@include breakpoint(large) {
+    .contact-form {
+
+        &__label {
+            color: $dark-gray;
+            font-size: 1rem;
+            margin: 0 0 0.5rem;
+        }
+
+    }
+}

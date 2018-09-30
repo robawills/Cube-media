@@ -1,0 +1,120 @@
+{# Prepare our error macro #}
+{% macro errorList(errors) %}
+	{# To display errors, you want to make sure errors exist,
+		 and then you can loop through and display them #}
+	{% if errors %}
+			<ul class="errors">
+                {% for error in errors %}
+                        <li>{{ error }}</li>
+                {% endfor %}
+			</ul>
+	{% endif %}
+{% endmacro %}
+
+{% from _self import errorList %}
+
+{# Get our Form data #}
+{% set form = craft.sproutForms.form('contact') %}
+
+{# Get our Form Entry data to manage error states and re-populating field values #}
+{% set submittedEntry = craft.sproutForms.getEntry(form) %}
+
+<form method="post" accept-charset="UTF-8" class="contact-form  js-contact-form">
+    {{ getCsrfInput() }}
+	<input type="hidden" name="action" value="sprout-forms/entries/save-entry">
+	<input type="hidden" name="handle" value="{{ form.handle }}">
+	<input type="hidden" name="redirect" value="{{ form.redirectUri }}">
+
+	<div class="grid-container  full">
+        <div class="grid-x  grid-margin-x">
+
+
+            {% set name = form.getField('name1') %}
+
+            {% if name is defined %}
+
+                <div class="medium-6  cell" id="fields-{{ name.handle }}">
+
+                    <label>
+                        <p class="required  contact-form__label" for="fields-{{ name.handle }}">{{ name.name }}</p>
+                        
+                        <input class="contact-form__input" autocomplete="name" required aria-required type="text" name="fields[{{ name.handle }}]" value="{{ attribute(submittedEntry, name.handle) }}">
+                    
+                    </label>
+
+                </div>
+
+            {% endif %}
+
+
+
+            {% set email = form.getField('email1') %}
+
+            {% if email is defined %}
+
+                <div class="medium-6  cell" id="fields-{{ email.handle }}">
+                    <label>
+                        <p class="required  contact-form__label" for="fields-{{ email.handle }}">{{ email.name }}</p>
+                        <input class="contact-form__input" autocomplete="email" required aria-required type="email" name="fields[{{ email.handle }}]" value="{{ attribute(submittedEntry, email.handle) }}">
+                    </label>
+
+                </div>
+
+            {% endif %}
+
+
+
+            {% set paragraph = form.getField('paragraph1') %}
+
+            {% if paragraph is defined %}
+
+                <div class="medium-12  cell">
+                    <label>
+                        <p class="required contact-form__label" id="fields-{{ paragraph.handle }}">{{ paragraph.name }}</p>
+
+                        <div class="input">
+                            <textarea class="contact-form__input" rows="2" cols="100" type="text" name="fields[{{ paragraph.handle }}]">
+                                {{- attribute(submittedEntry, paragraph.handle) -}}
+                            </textarea>
+                        </div>
+                        
+                    
+                    </label>
+
+                </div>
+
+            {% endif %}
+
+
+            <div class="medium-12  cell">
+                {% if contact is defined and contact.getErrors() | length %}
+                    {% for errors in contact.getErrors() %}
+                        <ul class="errors">
+                            {% for error in errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="grid-x  grid-margin-x">
+                    <div class="cell  shrink">
+                        <input class="button  bold" type="submit" value="SUBMIT">
+                    </div>
+                    <div class="cell  auto  hide  align-self-middle  contact-form__success-msg">
+                        <p>Thank you, your message has been sent.</p>
+                    </div>
+                </div>
+                <p><small>* Denotes that this field is required.</small></p>
+            </div>
+
+        </div>
+    </div>
+
+
+</form>
+
+
+
+
+

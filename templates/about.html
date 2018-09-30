@@ -1,0 +1,92 @@
+{#
+ # About us template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+ {% extends "_layouts/base" %}
+
+ {% block content %}
+ 
+         
+        {% if entry.heroBackground|length %}
+            {% for asset in entry.heroBackground %}
+                <article class="hero  hero--small" style="background: url('{{ asset.url }}') no-repeat center center;background-size: cover;">
+                </article>  
+            {% endfor %}
+        {% endif %}
+ 
+         <section class="services">
+             <div class="grid-container">
+                 <div class="grid-x  grid-margin-x">
+                     {% if entry.singleHeadline|length %}
+                        <div class="medium-9  cell">
+                            <h5>About us</h5>
+                            <h1>{{ entry.singleHeadline }}</h1>
+                        </div>
+                     {% endif %}
+
+                     {% if entry.aboutUsText|length %}
+                        <div class="medium-10  cell">
+                            <p>{{ entry.aboutUsText }}</p>
+                        </div>
+                     {% endif %}
+                 </div>
+             </div>
+         </section>
+
+         {% if entry.meetTheTeam|length %}
+            <section class="team">
+                <div class="grid-container">
+                    <div class="grid-x  grid-margin-x">
+                        <div class="small-12  cell">
+                            <h5>Meet the team</h5>
+                        </div>
+                        {% for teamMember in entry.meetTheTeam %}
+                            <artical class="medium-4  cell">
+                                {% for asset in teamMember.mugShot %}
+                                <div class="team__img" style="background: url('{{ asset.url }}') no-repeat center center;background-size: cover;">
+                                </div>
+                                {% endfor %}
+                                <div class="team__details">
+                                    <h1 class="team__title">{{ teamMember.TMName }}</h1>
+                                    <h2 class="team__job">{{ teamMember.TMRole }}</h2>
+                                    <p class="team__discription">{{ teamMember.TMAbout }}</p>                       
+                                </div>
+                            </artical>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+         {% endif %}
+         {# <section class="media">
+            <div class="grid-container">
+                <div class="grid-x  grid-margin-x">
+                    <div class="small-12  cell">
+                        <article class="media__size">
+                            <div class='embed-container'><iframe src='https://player.vimeo.com/video/232056422' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section> #}
+
+
+
+ 
+ {% endblock %}
+ 
+ 

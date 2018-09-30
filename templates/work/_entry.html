@@ -1,0 +1,84 @@
+{#
+ # Work entry
+ # ---------------
+ #
+ # This template gets loaded whenever the Work index is requested, because
+ # the Work Index single-entry section's Template setting is set to
+ # "work/_index".
+ #
+ # An `entry` variable will be automatically passed to this template, which will
+ # be set to the Work Index entry.
+ #}
+
+ {% extends "_layouts/base" %}
+
+ {% block content %}
+ 
+     <main class="app-main" role="main">
+        
+        <article class="project">
+            <div class="grid-container">
+                <div class="grid-x  grid-margin-x">
+                    
+                    <div class="small-12  medium-8  cell">
+                        <h1>{{ entry.title }}</h1>
+                    </div>
+
+                    {% if entry.challenge|length %}
+                        <div class="small-12  medium-8  cell">
+                            <h5>The challenge</h5>
+                            <p class="project__text">
+                                {{ entry.challenge }}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    {% if entry.delivered | length %}
+                        <div class="small-12  medium-4  cell">
+                            <h5>Delivered</h5>
+                            <ul>
+                                {% for row in entry.delivered %}
+                                <li class="project__text  p">{{ row.deliveredItem }} </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    
+                </div>
+            </div>
+        </article>
+
+        <section class="media">
+             <div class="grid-container">
+                 <div class="grid-x  grid-margin-x">
+
+                    {% if entry.videos|length %}
+                        {% for video in entry.videos %}
+                            <div class="small-12  cell">
+                                <article class="media__size">
+                                    <div class='embed-container'><iframe src='{{ video.videoId }}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+                                </article>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if entry.projectPhotography|length %}
+                        {% for asset in entry.projectPhotography %}
+                            <div class="small-12  medium-6  cell">
+                                <article class="media__size  media__size--s" style="background: url('{{ asset.url }}') no-repeat center center;">
+                                </article>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+
+                 </div>
+             </div>
+
+         </section>
+         
+     </main> 
+ 
+ {% endblock %}
+ 
