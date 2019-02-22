@@ -11,6 +11,10 @@ import Foundation from 'foundation-sites';
 
 $(document).foundation();
 
+
+// libs.AOS.init();
+
+
 import chatBox from './modules/_chat.js';
 
 $(() => {

@@ -14605,6 +14605,9 @@ window.$ = _jquery2.default;
 
 (0, _jquery2.default)(document).foundation();
 
+// libs.AOS.init();
+
+
 (0, _jquery2.default)(function () {
     (0, _chat2.default)();
 });
